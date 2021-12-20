@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" href="http://www.toffeemilkshake.co.uk/css/home.css"> 
+  <style>
+
+    .surprise{
+      display:inline-block;
+      position: fixed;
+      top:-1000px;
+      left:-1000px;
+      transition-property:left, right, top, bottom, right;
+      transition-duration: 0.1s;
+      
+    }
+    .surprise img{
+      max-width: 50vw;
+    }
+
+    .warning{
+      color: white;
+      background-color: red;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+  <body>
+    <article>
+    <h1>Grange Hill</h1>
+      <p class="warning">scroll to the bottom of the page</p>
+      <p>Grange Hill is a British children's television drama series, made by the BBC and portraying life in a typical comprehensive school.</p>
+      <p>The show began its run on 8 February 1978 on BBC1, and was one of the longest-running programmes on British television when it ended its run on 15 September 2008. It was created by Phil Redmond, who is also responsible for the Channel 4 dramas Brookside and Hollyoaks; other notable production team members down the years have included producer Colin Cant and script editor Anthony Minghella.</p>
+      <p>The show was cancelled in 2008, having run every year for 30 years. It was felt by the BBC that the series had run its course.</p>
+      <p>The drama was centred on the fictional comprehensive school of Grange Hill in the equally fictitious North London borough of Northam. As well as dealing with school-related issues such as bullying, learning difficulties, teacher-pupil relationships and conflicts, Grange Hill "broke new ground over the years, with the kind of hard-hitting storylines not usually seen in children's dramas", such as racism, drugs (e.g. Zammo McGuire's heroin addiction, LSD), teenage pregnancy, HIV/AIDS, homosexuality, knife crime, homelessness, rape/sexual assault, mental illness (e.g. bipolar disorder), divorce, cancer (e.g. leukemia), gun crime, child abuse, alcoholism and death. The series was originally to have been called Grange Park, which would go on to be used as the name of the school in another Redmond creation, the Channel 4 soap opera Brookside (1982–2003).</p>
+      <h2>Series history</h2>
+      <p>Grange Hill was originally conceived by ATV writer Phil Redmond, who first approached various television companies with the idea in 1975, unsuccessfully. In 1976, he managed to sell the idea to the BBC, and the children's drama executive Anna Home commissioned an initial series of nine episodes in a trial run, the first being broadcast on 8 February 1978.</p>
+      <p>From the start, the series caused controversy for its real-life, gritty portrayal of school life, which differed from the idealised portrayals of earlier school dramas. Redmond has said that he wasn't really able to start pushing the boundaries until later series.[citation needed] This led to Redmond being summoned to lunch by BBC bosses and forced to agree that there would be no further series unless he toned things down. Grange Hill's highest-profile period was undoubtedly the mid- to late 1980s. One of the most famous storylines during this time was that of Zammo McGuire, played by Lee MacDonald, and his addiction to heroin. This storyline ran over two series (1986–87) and focused on Zammo's descent into drugs and how it strained his relationship with girlfriend Jackie and friend Kevin. The show's other favourite characters during this period were Gonch and Hollo, played by John Holmes and Bradley Sheppard. During his time at the school (1985–89) Gonch took part in many moneymaking schemes, most of which were unsuccessful. There was a comedic element to the duo's relationship that worked well with viewers. Script editor Anthony Minghella, who worked on the series for several years during the 1980s, later won an Academy Award for Best Director for the film The English Patient in 1996.</p>
+      <p>During the 1990s, Grange Hill did not receive the same media attention that it had had just a few years before. The teachers were now equals in the narrative, with their personal lives taking up almost as much time as those of the pupils. In 1994, two characters were introduced with disabilities: Denny Roberts (Lisa Hammond), who had dwarfism, and Rachel Burns (Francesca Martinez), who had cerebral palsy. Both characters were presented as "one of the gang" and hated being accorded any special treatment because of their circumstances. This prompted the BFI's 2002 publication The Hill And Beyond to comment that Grange Hill had perhaps become politically correct.</p>
+      <div class="surprise"><img src="sausage.png"></div>
+      <footer>Source: <a href="https://en.wikipedia.org/wiki/Grange_Hill">https://en.wikipedia.org/wiki/Grange_Hill</a></footer>
+    </article>
+  </body>
+  <script>
+
+const surpriseElement = document.querySelector('.surprise');
+
+function handler(entries, observer) {
+  for (entry of entries) {
+    if (entry.isIntersecting) {
+      const width = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+      const height = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+      const imageRect = surpriseElement.getBoundingClientRect();
+      surpriseElement.style.left = `${width*entry.intersectionRatio - imageRect.width}px`;
+      surpriseElement.style.top = `${height*(entry.intersectionRatio) - imageRect.height}px`;
+    } else {
+      surpriseElement.style.left = `-1000px`;
+      surpriseElement.style.top = `-1000px`;
+    }
+  }
+}
+const threshold = [];
+for(let i=0.3; i<1;i+=0.01){
+  threshold.push(i);
+}
+let observer = new IntersectionObserver(handler,{threshold});
+  observer.observe(document.querySelector('footer'))
+  </script>
+</html> 
